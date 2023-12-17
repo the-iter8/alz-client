@@ -50,7 +50,6 @@ const Centered = styled.div`
 `;
 
 const FlexItem = styled.div`
-  text-align: center;
   width: 600px;
   @media (max-width: 530px) {
     width: 500px;
