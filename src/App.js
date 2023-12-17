@@ -105,7 +105,7 @@ let Button = styled.div`
 
 const Typo = styled.div`
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 7agit00;
   color: ${({ theme }) => theme.bgLighter};
   text-align: center;
 `;
@@ -145,7 +145,6 @@ function App() {
         formData,
         config
       );
-
 
       let id = parseInt(res.data.match(/\d+/)?.[0], 10);
 
