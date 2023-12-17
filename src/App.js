@@ -6,12 +6,8 @@ import ImageUpload from "./Components/ImageUpload";
 import ImagesCard from "./Components/ImagesCard";
 import Loader from "./Components/Loader/Loader";
 import axios from "axios";
-const data = [
-  "Mild Demented",
-  "Moderate Demented",
-  "Non Demented",
-  "Very Mild Demented",
-];
+import AlzheimerInfo from "./Components/AlzheimerInfo";
+const data = ["Mild Demented", "Moderate Demented", "Non Demented", "Very Mild Demented"];
 
 const Body = styled.div`
   display: flex;
@@ -31,7 +27,7 @@ const Heading = styled.div`
   }
   font-weight: 600;
 
-  margin: 1.5% 0px;
+  margin: 4% 0px;
 `;
 
 const Container = styled.div`
@@ -54,12 +50,13 @@ const Centered = styled.div`
 `;
 
 const FlexItem = styled.div`
-  width: 500px;
+  text-align: center;
+  width: 600px;
   @media (max-width: 530px) {
-    width: 400px;
+    width: 500px;
   }
   @media (max-width: 430px) {
-    width: 300px;
+    width: 400px;
   }
   display: flex;
   flex-direction: column;
@@ -140,11 +137,7 @@ function App() {
     };
 
     try {
-      const res = await axios.post(
-        "http://127.0.0.1:5000/detect",
-        formData,
-        config
-      );
+      const res = await axios.post("http://127.0.0.1:5000/detect", formData, config);
 
       let id = parseInt(res.data.match(/\d+/)?.[0], 10);
 
@@ -171,15 +164,19 @@ function App() {
         ) : (
           <Container>
             <FlexItem>
+              {!predictionState.showPrediction && (
+                <p>
+                  Please initiate the process by dragging/dropping or uploading the MRI scan belonging to the individual
+                  you wish to examine.
+                </p>
+              )}
               <ImageUpload images={images} setImages={setImages} />
-
               <SelectedImages>
                 {images &&
                   images.map((image, index) => {
                     return <ImagesCard key={index} image={image} />;
                   })}
               </SelectedImages>
-
               {images && (
                 <Button
                   onClick={() => {
@@ -194,6 +191,7 @@ function App() {
                   <Typo>Result : {predictionState.result}</Typo>
                 </FlexItem>
               )}
+              {predictionState.showPrediction && <AlzheimerInfo />}
             </FlexItem>
           </Container>
         )}
