@@ -19,6 +19,16 @@ const Body = styled.div`
   overflow-y: scroll;
 `;
 
+const InfoContainer = styled.div`
+display: flex;
+flex-direction: column;
+gap: 25px;
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+`;
+
 const Heading = styled.div`
   font-size: 42px;
   color: ${({ theme }) => theme.primary};
@@ -27,12 +37,13 @@ const Heading = styled.div`
   }
   font-weight: 600;
 
-  margin: 4% 0px;
+  margin: 1.5% 0px;
 `;
 
 const Container = styled.div`
-  max-width: 100%;
+  width: 90%;
   display: flex;
+  flex: 1;
   justify-content: center;
   flex-direction: row;
   @media (max-width: 1100px) {
@@ -50,12 +61,12 @@ const Centered = styled.div`
 `;
 
 const FlexItem = styled.div`
-  width: 600px;
+  width: 500px;
   @media (max-width: 530px) {
-    width: 500px;
+    width: 400px;
   }
   @media (max-width: 430px) {
-    width: 400px;
+    width: 300px;
   }
   display: flex;
   flex-direction: column;
@@ -163,34 +174,38 @@ function App() {
         ) : (
           <Container>
             <FlexItem>
-              {!predictionState.showPrediction && (
-                <p>
-                  Please initiate the process by dragging/dropping or uploading the MRI scan belonging to the individual
-                  you wish to examine.
-                </p>
-              )}
-              <ImageUpload images={images} setImages={setImages} />
-              <SelectedImages>
-                {images &&
-                  images.map((image, index) => {
-                    return <ImagesCard key={index} image={image} />;
-                  })}
-              </SelectedImages>
-              {images && (
-                <Button
-                  onClick={() => {
-                    generatePrediction();
-                  }}
-                >
-                  PREDICT
-                </Button>
-              )}
-              {predictionState.showPrediction && (
-                <FlexItem style={{ gap: "22px" }}>
-                  <Typo>Result : {predictionState.result}</Typo>
-                </FlexItem>
-              )}
-              {predictionState.showPrediction && <AlzheimerInfo />}
+              <AlzheimerInfo />
+            </FlexItem>
+            <FlexItem>
+              <InfoContainer>
+                {!predictionState.showPrediction && (
+                  <p>
+                    Please initiate the process by dragging/dropping or uploading the MRI scan belonging to the
+                    individual you wish to examine.
+                  </p>
+                )}
+                <ImageUpload images={images} setImages={setImages} />
+                <SelectedImages>
+                  {images &&
+                    images.map((image, index) => {
+                      return <ImagesCard key={index} image={image} />;
+                    })}
+                </SelectedImages>
+                {images && (
+                  <Button
+                    onClick={() => {
+                      generatePrediction();
+                    }}
+                  >
+                    PREDICT
+                  </Button>
+                )}
+                {predictionState.showPrediction && (
+                  <FlexItem style={{ gap: "22px" }}>
+                    <Typo>Result : {predictionState.result}</Typo>
+                  </FlexItem>
+                )}
+              </InfoContainer>
             </FlexItem>
           </Container>
         )}

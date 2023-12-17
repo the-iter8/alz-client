@@ -6,7 +6,6 @@ const InfoContainer = styled.div`
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  width: 80%; /* Adjust as needed */
 `;
 
 const Title = styled.h2`
@@ -23,7 +22,7 @@ const OverViewContainer = styled.div`
 `;
 const GifContainer = styled.div`
   border-radius: 10px;
-  width: 70%;
+  width: 50%;
 `;
 
 const Gif = styled.img`
@@ -86,7 +85,7 @@ const AlzheimerInfo = () => {
             <Gif src={Gif1} alt="Alzheimer's Gif" />
           </GifContainer>
         </OverViewContainer>
-      </InfoSection>
+      </InfoSection>{" "}
       <SymptomsSection>
         <h3>Symptoms</h3>
         <SymptomsList>
@@ -107,22 +106,6 @@ const AlzheimerInfo = () => {
         {/* Add more information about available treatments */}
       </TreatmentsSection>
 
-      <SupportSection>
-        <h3>Support Resources</h3>
-        <SupportInfo>
-          Finding support and resources can greatly assist individuals affected by Alzheimer's disease. Consider
-          reaching out to support groups, caregiver resources, and organizations dedicated to Alzheimer's disease.
-        </SupportInfo>
-        <div>
-          <ResourceLink target='_blank' href='https://www.alz.org/help-support'>
-            Support Groups
-          </ResourceLink>
-          <ResourceLink target='_blank' href='https://www.alz.org/help-support/caregiving'>
-            Caregiver Resources
-          </ResourceLink>
-          {/* Add more helpful links or contact information */}
-        </div>
-      </SupportSection>
     </InfoContainer>
   );
 };
